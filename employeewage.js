@@ -22,6 +22,25 @@ function calculateWage(totalWorkingHours){
     return totalWorkingHours * WAGE_PER_HOUR;
 }
 
+let empWage = 0;
+function sum(dailyWage){
+    return empWage += dailyWage;
+}
+
+let daysCounter = 0;
+function dayCount(dailyWage) {
+    daysCounter++;
+    return daysCounter + " = " + dailyWage;
+}
+
+function getFullTimeWage(dailyWage) {
+    return dailyWage.includes("160");
+}
+
+function getPartTimeWage(dailyWage) {
+    return dailyWage.includes("80");
+}
+
 let totalWorkingHours = 0;
 let totalWorkingDays = 0;
 let empHrs = 0;
@@ -33,8 +52,23 @@ while(totalWorkingHours <= TOTAL_WORKING_HOURS && totalWorkingDays < MAX_NUMBER_
     totalWorkingHours += getempHrs(empCheck);
     dailyWage.push(calculateWage(empHrs));
 }
-empWage = calculateWage(totalWorkingHours);
+
+dailyWage.forEach(sum);
+
+let mapWage = dailyWage.map(dayCount);
+console.log(mapWage);
+
 console.log("Daily Wage is : " + dailyWage);
 console.log("Total Hours : " + totalWorkingHours);
 console.log("Total Working Days : " + totalWorkingDays);
 console.log("Monthly Wage of an employee is : " + empWage);
+
+let fulltimewage = mapWage.filter(getFullTimeWage);
+console.log("Days where it is Full time : ");
+console.log(fulltimewage);
+
+console.log("Day where it is full time : " + mapWage.find(getFullTimeWage));
+
+console.log("Check all element having Full time : " + fulltimewage.every(getFullTimeWage));
+
+console.log("Check Part Time Wage : " + mapWage.some(getPartTimeWage));
