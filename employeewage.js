@@ -49,6 +49,7 @@ let totalWorkingHours = 0;
 let totalWorkingDays = 0;
 let empHrs = 0;
 let empHrsArr = [];
+let empHrsWage = [];
 while(totalWorkingHours <= TOTAL_WORKING_HOURS && totalWorkingDays < MAX_NUMBER_OF_WORKING_DAYS) {
     totalWorkingDays++;
     let empCheck = Math.floor(Math.random() * 10) % 3;
@@ -56,6 +57,16 @@ while(totalWorkingHours <= TOTAL_WORKING_HOURS && totalWorkingDays < MAX_NUMBER_
     totalWorkingHours += empHrs;
     empHrsArr.push(empHrs);
     dailyWage.push(calculateWage(empHrs));
+    empHrsWage.push(
+        {
+            daynum : totalWorkingDays,
+            dailyHours : empHrs,
+            dailyWage : calculateWage(empHrs),
+            toString(){
+                return "\nDay " + this.daynum + "=> Working Hours is : " + this.dailyHours + " Wages Earned is : " + this.dailyWage;
+            },
+        }
+    );
 }
 
 dailyWage.forEach(sum);
@@ -96,3 +107,5 @@ empHrsArr.forEach((value, key, map) => {
 console.log("Full working Days are : " + fullWorkingDays);
 console.log("Part working Days are : " + partWorkingDays);
 console.log("Non wokring Days are : " + nonWorkingDays);
+
+console.log("Showing Daily hours worked and wages earned : " + empHrsWage);
